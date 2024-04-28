@@ -5,7 +5,7 @@ const postcontroller = async(req,res) => {
 
     const {userid , Key} = req.body
 
-    if(!userid || Key != process.env.KEY){
+    if(!userid || Key !== process.env.KEY){
 
     }else{
      const data = await DB.find({id: userid})
