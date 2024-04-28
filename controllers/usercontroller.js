@@ -3,9 +3,9 @@ const DB = require('../models/usermodel')
 
 const postcontroller = async(req,res) => {
 
-    const {userid} = req.body
+    const {userid , Key} = req.body
 
-    if(!userid){
+    if(!userid || Key != process.env.KEY){
 
     }else{
      const data = await DB.find({id: userid})
