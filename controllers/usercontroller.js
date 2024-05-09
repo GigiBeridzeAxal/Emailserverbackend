@@ -11,6 +11,8 @@ const postcontroller = async(req,res) => {
 
     if(!userid || password !== process.env.Key){
 
+        res.json("Somethin Went Wrong")
+
     }else{
        
         const data = await DB.find({id: userid})
