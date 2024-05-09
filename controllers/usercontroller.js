@@ -1,5 +1,5 @@
 const DB = require('../models/usermodel')
-const MailDB = require('../models/mailmodel')
+
 const CrpytoJs = require('crypto-js')
 
 const postcontroller = async(req,res) => {
@@ -10,23 +10,12 @@ const postcontroller = async(req,res) => {
     if(!userid || password !== process.env.Key){
 
     }else{
-
-
-
-
-
        
+        const data = await DB.find({id: userid})
 
 
 
-            const data = await DB.find({id: userid})
-            const maildata = await MailDB.find({id:userid})
-
-
-
-
-     
-     if(data[0] !== undefined){
+        if(data[0] !== undefined){
 
 
 
@@ -59,6 +48,7 @@ const postcontroller = async(req,res) => {
 
 
 
+
 }
 
 const updateController = async(req,res) => {
@@ -78,16 +68,8 @@ const updateController = async(req,res) => {
 
     const update = await DB.updateOne({id:userid} , {credits: Creditsvalue[0].credits - 3})
 
-    if(update){
-        MailDB.create({
-            id: userid,
-            By,
-            To,
-             
-
-
-        })
-         res.json("Hello world")
+    if(update){ 
+        res.json("Hello world")
     }else{
      res.json("Hello worawdasdawdld")
     }
