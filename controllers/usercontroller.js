@@ -2,6 +2,8 @@ const DB = require('../models/usermodel')
 
 const CrpytoJs = require('crypto-js')
 
+const hello = "Hello"
+
 const postcontroller = async(req,res) => {
 
     const {userid , Key , Mailto , Text , Name} = req.body
