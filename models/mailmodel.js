@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { Tourney } = require('next/font/google')
 
 const MailSchema = mongoose.Schema({
 
@@ -7,19 +8,14 @@ const MailSchema = mongoose.Schema({
       type:String,
       required:true
     },
-    Mailto:{
+    By:{
         type:String,
         required:true
     },
-    Name:{
+    To:{
         type:String,
         required:true
-    },
-    Text:{
-        type:String,
-        required:true
-    }  
-
+    }
 
 })
 

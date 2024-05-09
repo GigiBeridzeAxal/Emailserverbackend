@@ -11,31 +11,50 @@ const postcontroller = async(req,res) => {
 
     }else{
 
-     const data = await DB.find({id: userid})
-     console.log(data[0] == null)
+
+
+
+
+       
+
+
+
+            const data = await DB.find({id: userid})
+            const maildata = await MailDB.find({id:userid})
+
+
+
 
      
-     if(data[0] == null){
+     if(data[0] !== undefined){
 
 
-          
 
-                const create = DB.create({
 
-                    id: userid,
-                    credits:15
-                })
-                if(create || mailcrate){
-                    res.json("Created")
-                }else{
-                    res.json("Cant Create")
-                }
+          res.json(data[0])
+
+                
+                
 
 
 
      }else{
-        res.json(data[0])
+
+        
+        const create = DB.create({
+
+                    id: userid,
+                    credits:15
+                })
+                if(create){
+
+
+
+                    res.json("Created")
+                }else{
+                    res.json("Cant Create")
      }
+    }
     }
 
 
@@ -45,10 +64,10 @@ const postcontroller = async(req,res) => {
 const updateController = async(req,res) => {
   
 
-    const {userid , Key} = req.body
+    const {userid , Key , By , To} = req.body
     const password = CrpytoJs.AES.decrypt(Key , process.env.SECRETKEY).toString(CrpytoJs.enc.Utf8)
 
-    if(!userid || password !== process.env.Key){
+    if(!userid || !By || !To || password !== process.env.Key){
         res.json("Dont Steal Any Information !!!")
     }else{
         
@@ -60,6 +79,14 @@ const updateController = async(req,res) => {
     const update = await DB.updateOne({id:userid} , {credits: Creditsvalue[0].credits - 3})
 
     if(update){
+        MailDB.create({
+            id: userid,
+            By,
+            To,
+             
+
+
+        })
          res.json("Hello world")
     }else{
      res.json("Hello worawdasdawdld")
