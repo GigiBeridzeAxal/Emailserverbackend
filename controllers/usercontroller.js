@@ -1,15 +1,15 @@
 const DB = require('../models/usermodel')
 
-const CrpytoJs = require('crypto-js')
+
 
 
 
 const postcontroller = async(req,res) => {
 
-    const {userid , Key , Mailto , Text , Name} = req.body
-    const password = CrpytoJs.AES.decrypt(Key , process.env.SECRETKEY).toString(CrpytoJs.enc.Utf8)
+    const {userid , Mailto , Text , Name} = req.body
 
-    if(!userid || password !== process.env.Key){
+
+    if(!userid){
 
         res.json("Somethin Went Wrong")
 
@@ -58,14 +58,15 @@ const postcontroller = async(req,res) => {
 const updateController = async(req,res) => {
   
 
-    const {userid , Key , By , To} = req.body
-    const password = CrpytoJs.AES.decrypt(Key , process.env.SECRETKEY).toString(CrpytoJs.enc.Utf8)
+    const {userid , Key} = req.body
 
-    if(!userid || !By || !To || password !== process.env.Key){
+
+    if(!userid){
         res.json("Dont Steal Any Information !!!")
     }else{
         
     const Creditsvalue = await DB.find({id:userid}) 
+    console.log(Creditsvalue.data)
 
 
 
