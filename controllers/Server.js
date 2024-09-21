@@ -1,4 +1,5 @@
 const Servermodel = require("../models/Servermodel");
+const usermodel = require("../models/usermodel");
 
 
 
@@ -186,7 +187,45 @@ const createserver = async(req,res) => {
         })
         if(create){
             res.json("Server Succesfuly Launched")
-            console.log("created")
+            console.log("created") 
+            const findupd = await usermodel.find({id:owner})
+
+            switch (plan) {
+                case "emerald":
+
+                const upd2 = await usermodel.updateOne({id:owner} , {credits:findupd[0].credits - 2500})
+
+                    break;
+                    case "golden":
+
+                        const upd1 = await usermodel.updateOne({id:owner} , {credits:findupd[0].credits - 1000})
+        
+                    
+                    break;
+                    case "silver":
+    
+                        const upd = await usermodel.updateOne({id:owner} , {credits:findupd[0].credits - 500})
+        
+        
+                    
+                    break;
+                default:
+                    break;
+            }
+
+            if(plan === 'emerald'){
+
+
+            }
+
+            if(plan === 'silver'){
+
+                
+            }
+            if(plan === 'golden'){
+
+
+            }
         }else{
             res.json("Something Went Wrong Please Try Again")
         }
