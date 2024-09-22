@@ -1,11 +1,12 @@
-const express = require('express')
+const express = require('express');
+const usermodel = require('../models/usermodel');
 
 
 
 
 const sendmail = async(req,res) => {
 
-    const {message, email , username} = req.body
+    const {message, email , username , userid} = req.body
 
     console.log(message,email,username)
 
@@ -41,6 +42,12 @@ async function main() {
   console.log("Message sent: %s", info.messageId);
   
   // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
+}
+if(info){
+  const find = await usermodel.find({userid:userid})
+  if(find){
+    const update = await usermodel.updateOne({userid:userid}, {credits:find[0].credits - 3})
+  }
 }
 
 main().catch(console.error);
