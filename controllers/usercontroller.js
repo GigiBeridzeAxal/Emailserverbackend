@@ -6,7 +6,7 @@ const DB = require('../models/usermodel')
 
 const postcontroller = async(req,res) => {
 
-    const {userid , Mailto , Text , Name} = req.body
+    const {userid } = req.body
 
 
     if(!userid){
@@ -17,6 +17,7 @@ const postcontroller = async(req,res) => {
        
         const data = await DB.find({id: userid})
 
+        console.log
 
 
         if(data[0] !== undefined){
@@ -34,7 +35,7 @@ const postcontroller = async(req,res) => {
      }else{
 
         
-        const create = DB.create({
+        const create = await DB.create({
 
                     id: userid,
                     credits:15
