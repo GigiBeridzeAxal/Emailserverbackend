@@ -20,12 +20,14 @@ const routeFilter = (req, res, next) => {
 
     if(!bcrypted){
         throw new Error("Dont Try Again :)")
+        console.log(req.url)
     }else{
          
         if(bcrypt.compare(process.env.Key , bcrypted)){
             
         }else{
             throw new Error("Dont Try Again :)")
+            console.log(req.url)
         }
         
 
