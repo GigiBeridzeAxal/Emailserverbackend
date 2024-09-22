@@ -44,9 +44,9 @@ async function main() {
   // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
 }
 
-  const find = await usermodel.find({userid:userid})
+  const find = await usermodel.find({id:userid})
   if(find){
-    const update = await usermodel.updateOne({userid:userid}, {credits:find[0].credits - 3})
+    const update = await usermodel.updateOne({id:userid}, {credits:find[0].credits - 3})
   }
 
 
