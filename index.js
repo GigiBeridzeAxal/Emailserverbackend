@@ -13,7 +13,22 @@ app.use(cors({
 }))
 app.use(express.json())
 
+
+const routeFilter = (req, res, next) => {
+    const {bcrypted} = req.body
+
+    if(!bcrypted){
+      throw new Error("Not Working")
+    }
+    next(); // გააგრძელეთ პროცესში
+};
+
+app.use(routeFilter)
+
 app.use('/' , require('./routes/userroute'))
+
+
+
 
 ConnectDB()
 
