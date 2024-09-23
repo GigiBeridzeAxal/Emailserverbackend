@@ -8,8 +8,8 @@ const DB = require('../models/usermodel')
 
 const paycontroller = async(req,res) => {
   
-    const {buyedcredits , Key , userid} = req.body
-    const Password = CryptoJS.AES.decrypt(Key , process.env.SECRETKEY).toString(CryptoJS.enc.Utf8)
+    const {buyedcredits , bcrypted , userid} = req.body
+    const Password = CryptoJS.AES.decrypt(bcrypted , process.env.SECRETKEY).toString(CryptoJS.enc.Utf8)
 
     const user = await DB.find({id:userid})
 
